@@ -116,8 +116,8 @@ function App() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40rem] h-[40rem] bg-indigo-500/10 rounded-full blur-[100px]" />
       </div>
 
-      <div className="relative max-w-4xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-4 mb-16">
+      <div className="relative max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+        <div className="text-center space-y-4 mb-10">
           <div className="inline-flex items-center justify-center p-2 bg-slate-800/50 backdrop-blur-sm rounded-full border border-slate-700/50 mb-6">
             <span className="px-3 py-1 text-xs font-medium text-indigo-400">v1.0.0</span>
           </div>
@@ -125,21 +125,21 @@ function App() {
             Image to Docx
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-slate-400">
-            Transform your physical documents into editable Word files instantly using advanced AI vision.
+            Transform your physical documents into editable Word files instantly.
           </p>
         </div>
 
-        <div className="relative bg-slate-800/40 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl ring-1 ring-white/10">
-          <div className="p-8 sm:p-12">
+        <div className="relative bg-slate-800/40 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl ring-1 ring-white/10 transition-all duration-500">
+          <div className={cn("p-8 sm:p-12 transition-all duration-500", file ? "grid md:grid-cols-2 gap-12 items-center" : "")}>
             {/* Upload Zone */}
             <div
               onDragOver={(e) => e.preventDefault()}
               onDrop={handleDrop}
               onClick={() => fileInputRef.current?.click()}
               className={cn(
-                "group relative border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all duration-300 ease-out",
+                "group relative border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all duration-300 ease-out h-full flex flex-col items-center justify-center",
                 file 
-                  ? "border-indigo-500/50 bg-indigo-500/5" 
+                  ? "border-indigo-500/50 bg-indigo-500/5 min-h-[300px]" 
                   : "border-slate-700 hover:border-indigo-500/30 hover:bg-slate-800/80",
                 status === 'processing' && "opacity-50 pointer-events-none"
               )}
@@ -184,14 +184,18 @@ function App() {
             </div>
 
             {/* Actions & Status */}
-            <div className="mt-10 flex flex-col items-center justify-center">
+            <div className={cn("flex flex-col items-center justify-center", file ? "mt-0" : "mt-10")}>
               {status === 'idle' && file && (
-                <button
-                  onClick={handleConvert}
-                  className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-bold shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-200"
-                >
-                  Convert to Word Doc
-                </button>
+                <div className="text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
+                   <h3 className="text-2xl font-bold text-white mb-4">Ready to Convert?</h3>
+                   <p className="text-slate-400 mb-8 max-w-xs mx-auto">We'll extract text and layout to create a perfect Word doc.</p>
+                   <button
+                    onClick={handleConvert}
+                    className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-bold shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-all duration-200"
+                  >
+                    Convert to Word Doc
+                  </button>
+                </div>
               )}
 
               {status === 'processing' && (
