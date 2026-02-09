@@ -1,97 +1,109 @@
-# Image to Docx Application Setup
+# 📄 DocuLens - AI Image to Word Converter
 
-## Prerequisites
+**DocuLens** is a premium, AI-powered document digitization tool that instantly transforms physical document photos into fully editable Microsoft Word (`.docx`) files.
 
-- Python 3.10+
-- Node.js 18+
-- Google Cloud Service Account JSON key (for Vision API)
-- Anthropic API Key (for Claude)
-- Docker & Docker Compose (optional)
+Built with a focus on accuracy and aesthetics, it leverages **Google Cloud Vision** for state-of-the-art OCR and **Anthropic's Claude 3.5 Sonnet** to intelligently reconstruct document structure, tables, and formatting.
 
-## Manual Setup
+![DocuLens UI](https://placehold.co/1200x600/0f172a/6366f1?text=DocuLens+Preview)
 
-### Backend
+## ✨ Key Features
 
-1. Navigate to the backend directory:
+- **📸 Advanced OCR**: Uses Google Cloud Vision API to detect text with varying fonts, handwriting, and layouts.
+- **🧠 Intelligent Structuring**: Claude 3.5 analyzes the raw text to reconstruct headers, lists, tables, and paragraphs.
+- **🎨 Premium UI**: A modern, glassmorphic interface built with React and Tailwind CSS.
+  - **Dark Mode by Default**: Sleek Slate-900 theme with indigo/purple gradients.
+  - **Drag & Drop**: Intuitive file upload.
+- **⚡ Local & Cloud Ready**: Fully Dockerized for easy local development and seamless deployment to platforms like Render.
 
-   ```bash
-   cd backend
-   ```
+## 🛠️ Tech Stack
 
-2. Create a virtual environment and install dependencies:
+- **Frontend**: React, Vite, Tailwind CSS (CDN), Lucide Icons
+- **Backend**: Python 3.10+, FastAPI
+- **AI Services**:
+  - Google Cloud Vision API (OCR)
+  - Anthropic Claude 3.5 Sonnet (Structure Recovery)
+- **Infrastructure**: Docker, Docker Compose
 
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
+## 🚀 Getting Started
 
-3. Set up environment variables:
-   Create a `.env` file in the `backend` directory (copy from `.env.example`):
+### Prerequisites
 
-   ```bash
-   cp .env.example .env
-   ```
+- **Python 3.10+** & **Node.js 18+**
+- **Google Cloud Service Account** JSON key (for Vision API)
+- **Anthropic API Key** (for Claude)
+- **Docker** (optional, recommended)
 
-   **Important:**
-   - Set `ANTHROPIC_API_KEY` to your Claude API key.
-   - Set `GOOGLE_APPLICATION_CREDENTIALS` to the absolute path of your Google Cloud service account JSON file.
+### 🐳 Docker Setup (Recommended)
 
-4. Start the backend server:
-   ```bash
-   uvicorn main:app --reload
-   ```
-   The backend will be running at `http://localhost:8000`.
-
-### Frontend
-
-1. Navigate to the frontend directory:
-
-   ```bash
-   cd frontend
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   The frontend will be running at `http://localhost:5173`.
-
-## Docker Setup
-
-### Production (Static Build)
-
-Builds the frontend and serves via Nginx.
+**1. Clone & Configure**
 
 ```bash
+git clone https://github.com/yourusername/doculens.git
+cd doculens
+cp backend/.env.example backend/.env
+```
+
+**2. Setup Credentials**
+
+- Paste your `ANTHROPIC_API_KEY` into `backend/.env`.
+- Place your Google Cloud Service Account JSON file in `backend/` (e.g., `backend/service-account.json`).
+- Update `backend/.env`:
+  ```bash
+  GOOGLE_APPLICATION_CREDENTIALS=/app/service-account.json
+  ```
+
+**3. Run with Docker Compose**
+
+```bash
+# Development (Hot-Reload)
+docker-compose -f docker-compose.dev.yml up --build
+
+# Production (Static Build)
 docker-compose up --build
 ```
 
-Access at `http://localhost:5174`.
+Access the app at `http://localhost:5174`.
 
-### Development (Hot-Reload)
+### 🔧 Manual Setup
 
-Runs frontend in dev mode and watches backend for changes.
+<details>
+<summary>Click to expand manual setup instructions</summary>
+
+#### Backend
 
 ```bash
-docker-compose -f docker-compose.dev.yml up --build
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+# Edit .env with your keys
+uvicorn main:app --reload --port 8001
 ```
 
-Access at `http://localhost:5174` (Backend at `http://localhost:8001`).
+#### Frontend
 
-**Note on Credentials in Docker:**
-If your `GOOGLE_APPLICATION_CREDENTIALS` points to a file, ensure that file is accessible to the container. The `docker-compose.yml` mounts the `./backend` directory to `/app`.
-**We recommend placing your `service-account.json` inside the `backend/` folder** and updating your `.env` to point to `/app/service-account.json` (for Docker) or the relative path (for local dev).
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-## Usage
+</details>
 
-1. Open http://localhost:5174 in your browser.
-2. Drag and drop an image of a document (or click to upload).
-3. Click "Convert to Word".
-4. Wait for the process to complete and download the `.docx` file.
+## ☁️ Deployment
+
+This project is configured for easy deployment on **Render**.
+
+1. **Create a New Web Service** on Render pointing to this repo.
+2. **Environment Variables**: Add `ANTHROPIC_API_KEY`.
+3. **Secret Files**: Upload your Google Service Account JSON as a "Secret File" to `/etc/secrets/google-credentials.json`.
+4. **Build Command**: `npm install && npm run build` (if deploying frontend static site).
+
+## 🤝 Support
+
+If you find this tool helpful, consider supporting the development!
+
+<a href="https://buymeacoffee.com/puvaanraaj" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
+</a>
