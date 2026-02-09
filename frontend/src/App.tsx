@@ -3,10 +3,30 @@ import axios from 'axios';
 import { Upload, FileText, CheckCircle, Loader2, AlertCircle, FileType } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import './App.css';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+// Force dark mode by default
+document.documentElement.classList.add('dark');
+document.body.style.backgroundColor = '#0f172a'; // Match Tailwind slate-900
+document.body.style.color = '#f8fafc'; // Match Tailwind slate-50
+
+// Buy Me a Coffee Component
+const BuyMeCoffee = () => (
+  <a 
+    href="https://buymeacoffee.com/puvaanraaj" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="fixed bottom-4 right-4 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-full shadow-lg flex items-center gap-2 transition-transform hover:scale-105 z-50"
+    style={{ textDecoration: 'none' }}
+  >
+    <span>☕</span>
+    <span>Buy me a coffee</span>
+  </a>
+);
 
 type ConversionStatus = 'idle' | 'uploading' | 'processing' | 'completed' | 'error';
 
@@ -216,6 +236,7 @@ function App() {
           <p>Powered by Google Vision & Claude 3</p>
         </div>
       </div>
+      <BuyMeCoffee />
     </div>
   );
 }
