@@ -252,9 +252,12 @@ function App() {
           </div>
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="mt-8 text-center space-y-4">
           <p className="text-sm text-slate-500 flex items-center justify-center gap-2">
             Powered by <span className="text-slate-400 font-semibold">Google Vision</span> & <span className="text-slate-400 font-semibold">Claude 3.5</span>
+          </p>
+          <p className="text-xs text-slate-600">
+            &copy; {new Date().getFullYear()} Puvaan Raaj. All rights reserved.
           </p>
         </div>
       </div>
