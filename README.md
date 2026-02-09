@@ -73,7 +73,7 @@ Builds the frontend and serves via Nginx.
 docker-compose up --build
 ```
 
-Access at `http://localhost:5173`.
+Access at `http://localhost:5174`.
 
 ### Development (Hot-Reload)
 
@@ -83,13 +83,15 @@ Runs frontend in dev mode and watches backend for changes.
 docker-compose -f docker-compose.dev.yml up --build
 ```
 
+Access at `http://localhost:5174` (Backend at `http://localhost:8001`).
+
 **Note on Credentials in Docker:**
 If your `GOOGLE_APPLICATION_CREDENTIALS` points to a file, ensure that file is accessible to the container. The `docker-compose.yml` mounts the `./backend` directory to `/app`.
 **We recommend placing your `service-account.json` inside the `backend/` folder** and updating your `.env` to point to `/app/service-account.json` (for Docker) or the relative path (for local dev).
 
 ## Usage
 
-1. Open http://localhost:5173 in your browser.
+1. Open http://localhost:5174 in your browser.
 2. Drag and drop an image of a document (or click to upload).
 3. Click "Convert to Word".
 4. Wait for the process to complete and download the `.docx` file.

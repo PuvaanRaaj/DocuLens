@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    container_name: image-docx-backend
+    ports:
+      - "8001:8000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      # Mount service account key if it's in a specific path, or user can put it in backend/
+      - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    container_name: image-docx-frontend
+    ports:
+      - "5174:80"
+    depends_on:
+      - backend
