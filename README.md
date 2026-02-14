@@ -1,19 +1,20 @@
-# 📄 DocuLens - AI Image to Word Converter
+# 📄 DocuLens - AI Document Converter
 
-**DocuLens** is a premium, AI-powered document digitization tool that instantly transforms physical document photos into fully editable Microsoft Word (`.docx`) files.
+**DocuLens** is a premium, AI-powered document digitization tool that transforms images and PDFs into editable documents — **Word (.docx)**, **PDF**, or **plain text (.txt)**.
 
 Built with a focus on accuracy and aesthetics, it leverages **Google Cloud Vision** for state-of-the-art OCR and **Anthropic's Claude 3.5 Sonnet** to intelligently reconstruct document structure, tables, and formatting.
 
-![DocuLens UI](https://placehold.co/1200x600/0f172a/6366f1?text=DocuLens+Preview)
+![DocuLens UI](https://placehold.co/1200x600/0f172a/6366f1?text=DocuLens+v2.0)
 
 ## ✨ Key Features
 
 - **📸 Advanced OCR**: Uses Google Cloud Vision API to detect text with varying fonts, handwriting, and layouts.
 - **🧠 Intelligent Structuring**: Claude 3.5 analyzes the raw text to reconstruct headers, lists, tables, and paragraphs.
-- **🎨 Premium UI**: A modern, glassmorphic interface built with React and Tailwind CSS.
-  - **Dark Mode by Default**: Sleek Slate-900 theme with indigo/purple gradients.
-  - **Drag & Drop**: Intuitive file upload.
-- **⚡ Local & Cloud Ready**: Fully Dockerized for easy local development and seamless deployment to platforms like Render.
+- **📑 PDF Input**: Upload PDFs — each page is extracted and OCR'd automatically.
+- **📤 Multi-Format Output**: Export as Word (.docx), PDF, or plain text (.txt).
+- **📦 Multi-File Upload**: Batch upload images and PDFs, merged into a single output document.
+- **🎨 Premium UI**: Modern glassmorphic dark-mode interface with drag-and-drop.
+- **⚡ Local & Cloud Ready**: Fully Dockerized for easy local development and deployment.
 
 ## 🛠️ Tech Stack
 
